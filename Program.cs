@@ -5,37 +5,37 @@ internal class TextFieldParser
     {
         using(var reader = new StreamReader(@".\data\apartment_buildings_2019.csv"))
         {
-            List<string> ID = new List<string>();
-            List<string> Status = new List<string>();
+            //initializing values for counting how many buildings there are, how many of them are renovated and not renovated.
+            int building_count=(-1);
+            double renovated=0;
+            double nonrenovated=0;
 
+            //reading untill the end of the file.
             while (!reader.EndOfStream)
             {
+                //reading one line and spliting it by the seperator used in the file.
                 var line = reader.ReadLine();
                 var values = line.Split(';');
+                
+                //checking the specific values to see if the building is documented to be renovated or not.
+                if(values[12] =="Renovuotas")
+                    renovated++;
 
-                ID.Add(values[0]);
-                Status.Add(values[12]);
+                else if(values[12] =="Nerenovuotas")
+                    nonrenovated++;
+
+                //counting the total number of buildings there are in the given csv file.
+                building_count++;
             }
 
-            int i=0;
-            float x=0;
-            foreach(string numbers in ID)
-            {
-                if(Status[i]=="Nerenovuotas")
-                {
-                    Console.WriteLine($"{numbers} : {Status[i]}");
-                }
-                if(Status[i]=="Renovuotas")
-                {
-                    Console.WriteLine($"{numbers} : {Status[i]}");
-                    x++;
-                }
-                i++;
-            }
-            Console.WriteLine($"i = {i}");
-            Console.WriteLine($"x = {x}");
-            x = (x/i)*100;
-            Console.WriteLine($"Renovuotu pastatu yra :{x}%, nerenovuotu yra {100-x}%");
+            //calculating the percentages for the output    
+            double renovated_percentage = Math.Round((renovated/building_count)*100,3);
+            double nonrenovated_percentage = Math.Round((nonrenovated/building_count)*100,3);
+
+            //outputing
+            Console.WriteLine($"Renovated houses make up: {renovated_percentage} %");
+            Console.WriteLine($"Not renovated houses make up: {nonrenovated_percentage} %");
+            Console.WriteLine($"The rest of the houses make up: {Math.Round(100 - (renovated_percentage + nonrenovated_percentage),3)} %");
         }
     }
 }
