@@ -1,9 +1,17 @@
 ﻿using System.IO;
+using System.Net;
+
 internal class TextFieldParser
 {
     static void Main(string[] args)
     {
-        using(var reader = new StreamReader(@".\data\apartment_buildings_2019.csv"))
+        //downloads the needed data file
+        using (var client = new WebClient())
+        {
+            client.DownloadFile("https://raw.githubusercontent.com/vilnius/apartment-buildings/master/apartment_buildings_2019.csv", "apartment_buildings_2019.csv");
+        }
+
+        using(var reader = new StreamReader(@"apartment_buildings_2019.csv"))
         {
             //initializing values for counting how many buildings there are, how many of them are renovated and not renovated.
             int building_count=(-1);
@@ -13,18 +21,25 @@ internal class TextFieldParser
             int JVS=0;
             int bendrija=0;
 
+            
+
             //reading untill the end of the file.
             while (!reader.EndOfStream)
             {
                 //reading one line and spliting it by the seperator used in the file.
                 var line = reader.ReadLine();
-                var values = line.Split(';');
                 
-                //checking the specific values to see if the building is documented to be renovated or not.
-                if(values[12] =="Renovuotas")
+                var values = line.Split(';');
+    
+                //skips two lines where there is an uneeded end line and the data differes from the rest of the file for no reason
+                if((values[0] != "120") && (!values[0].StartsWith('"')))
                 {
+                    //checking the specific values to see if the building is documented to be renovated or not.
+                    if(values[12] =="Renovuotas")
                     renovated++;
-                    
+                    else if(values[12] =="Nerenovuotas")
+                    nonrenovated++;
+
                     if(values[3]=="Administravimas")
                         admin++;
                         else if(values[3]=="JVS")
@@ -32,11 +47,6 @@ internal class TextFieldParser
                             else if(values[3]=="Bendrija")
                             bendrija++;
                 }
-                    
-
-                else if(values[12] =="Nerenovuotas")
-                    nonrenovated++;
-
                 //counting the total number of buildings there are in the given csv file.
                 building_count++;
             }
