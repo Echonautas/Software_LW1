@@ -17,11 +17,11 @@ internal class TextFieldParser
             int building_count=(-1);
             double renovated=0;
             double nonrenovated=0;
+
             int admin=0;
             int JVS=0;
             int bendrija=0;
 
-            
 
             //reading untill the end of the file.
             while (!reader.EndOfStream)
@@ -36,17 +36,29 @@ internal class TextFieldParser
                 {
                     //checking the specific values to see if the building is documented to be renovated or not.
                     if(values[12] =="Renovuotas")
-                    renovated++;
-                    else if(values[12] =="Nerenovuotas")
-                    nonrenovated++;
+                    {
+                        if(values[3]=="Administravimas")
+                        {
+                            admin++;
+                        }    
+                            else if(values[3]=="JVS")
+                            {
+                                JVS++;
+                            }
+                                else if(values[3]=="Bendrija")
+                                {
+                                    bendrija++;
+                                }
 
-                    if(values[3]=="Administravimas")
-                        admin++;
-                        else if(values[3]=="JVS")
-                            JVS++;
-                            else if(values[3]=="Bendrija")
-                            bendrija++;
+                        renovated++;
+                    }
+                    
+                    else if(values[12] =="Nerenovuotas")
+                    {
+                        nonrenovated++;
+                    }    
                 }
+                
                 //counting the total number of buildings there are in the given csv file.
                 building_count++;
             }
