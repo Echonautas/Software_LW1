@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\School stuff\\Software\\LW1\\Software.csproj": {}
+    "C:\\Roko LW1\\Software.csproj": {}
   },
   "projects": {
-    "D:\\School stuff\\Software\\LW1\\Software.csproj": {
+    "C:\\Roko LW1\\Software.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\School stuff\\Software\\LW1\\Software.csproj",
+        "projectUniqueName": "C:\\Roko LW1\\Software.csproj",
         "projectName": "Software",
-        "projectPath": "D:\\School stuff\\Software\\LW1\\Software.csproj",
-        "packagesPath": "C:\\Users\\Rokas\\.nuget\\packages\\",
-        "outputPath": "D:\\School stuff\\Software\\LW1\\obj\\",
+        "projectPath": "C:\\Roko LW1\\Software.csproj",
+        "packagesPath": "C:\\Users\\Kasparas\\.nuget\\packages\\",
+        "outputPath": "C:\\Roko LW1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Rokas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Kasparas\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
